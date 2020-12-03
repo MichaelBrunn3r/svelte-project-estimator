@@ -1,4 +1,6 @@
 <script>
+	import materialStore from './material-store.js';
+
 	export let id;
 	export let material = '';
 	export let price;
@@ -9,12 +11,18 @@
 	function submit(e) {
 		if(!canSubmit) return;
 
-		price = material = '';
+		if(submitButtonMode === 'add') {
+			materialStore.add(material, price);
+		}
+
+		price = undefined;
+		material = '';
 		id = undefined;
 	}
 
 	function cancel() {
-		price = material = '';
+		price = undefined;
+		material = '';
 		id = undefined;
 	}
 </script>
