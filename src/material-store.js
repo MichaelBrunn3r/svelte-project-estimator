@@ -24,7 +24,18 @@ const add = (material, price) => {
 	})
 }
 
+const edit = (id, material, price) => {
+	materialStore.update(items => {
+		const idx = items.findIndex(item => item.id === id);
+		items[idx].material = material;
+		items[idx].price = price;
+
+		return items;
+	})
+}
+
 export default {
 	subscribe: materialStore.subscribe,
-	add
+	add,
+	edit
 }

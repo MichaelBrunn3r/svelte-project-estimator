@@ -15,6 +15,10 @@
 			materialStore.add(material, price);
 		}
 
+		if(submitButtonMode === 'edit') {
+			materialStore.edit(id, material, price);
+		}
+
 		price = undefined;
 		material = '';
 		id = undefined;
