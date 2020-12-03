@@ -489,6 +489,9 @@ var app = (function () {
     const edit = (id, material, price) => {
     	materialStore.update(items => {
     		const idx = items.findIndex(item => item.id === id);
+
+    		if(idx === -1) return items;
+
     		items[idx].material = material;
     		items[idx].price = price;
 
