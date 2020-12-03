@@ -34,8 +34,15 @@ const edit = (id, material, price) => {
 	})
 }
 
+const remove = (id) => {
+	materialStore.update(items => {
+		return items.filter(item => item.id !== id);
+	})
+}
+
 export default {
 	subscribe: materialStore.subscribe,
 	add,
-	edit
+	edit,
+	remove
 }

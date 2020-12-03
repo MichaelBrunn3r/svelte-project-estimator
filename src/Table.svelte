@@ -1,6 +1,5 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-import { exclude_internal_props } from 'svelte/internal';
 	import materialStore from './material-store.js';
 
 	const dispatch = createEventDispatcher();
@@ -21,6 +20,10 @@ import { exclude_internal_props } from 'svelte/internal';
 	function edit(id, material, price) {
 		dispatch('edit', {id, material, price});
 	}
+
+	function remove(id) {
+		materialStore.remove(id);
+	}
 </script>
 
 <style>
@@ -29,6 +32,9 @@ import { exclude_internal_props } from 'svelte/internal';
 	}
 	tr {
 		cursor: pointer;
+	}
+	tr:last-child {
+		cursor: inherit;
 	}
 </style>
 
@@ -47,7 +53,8 @@ import { exclude_internal_props } from 'svelte/internal';
 				<td>{material.material}</td>
 				<td>{formatter.format(material.price)}</td>
 				<td>
-					<i class="far fa-trash-alt"></i>
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<a on:click|preventDefault|stopPropagation={remove(material.id)}><i class="far fa-trash-alt"/></a>
 				</td>
 			</tr>
 		{/each}
